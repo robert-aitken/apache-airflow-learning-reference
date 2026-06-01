@@ -1,4 +1,4 @@
-# Share the value from task_a to task_b using XCom.
+# Share multiple values between tasks using XCom.
 from airflow.sdk import dag, task
 
 
@@ -7,15 +7,18 @@ def xcom_dag():
 
     @task
     def task_a():
-        val = 42
-        return val
+        values = {
+            "val_1": 42,
+            "val_2": 43,
+        }
+        return values
 
     @task
-    def task_b(val: int):
-        print(val)
+    def task_b(values: dict):
+        print(values)
 
-    val = task_a()
-    task_b(val)
+    values = task_a()
+    task_b(values)
 
 
 xcom_dag()
