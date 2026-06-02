@@ -17,6 +17,7 @@ def sensors_dag():
         aws_conn_id="aws_s3",
         bucket_key="s3://example-bucket/data_*",
         wildcard_match=True,
+        mode="reschedule",
     )
 
     @task
