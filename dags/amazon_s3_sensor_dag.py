@@ -10,7 +10,7 @@ from pendulum import datetime
     description="DAG showing how to wait for a file in S3 using a sensor",
     tags=["sensors"],
 )
-def sensors_dag():
+def amazon_s3_sensor_dag():
 
     wait_for_file = S3KeySensor(
         task_id="wait_for_file",
@@ -27,4 +27,4 @@ def sensors_dag():
     wait_for_file >> process_file()
 
 
-sensors_dag()
+amazon_s3_sensor_dag()
