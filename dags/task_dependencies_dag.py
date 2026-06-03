@@ -5,15 +5,16 @@ default_args = {
     "retries": 3,
 }
 
+
 @dag(
     schedule="@daily",
     start_date=datetime(2025, 1, 1),
-    description="This dag does...",
+    description="DAG showing task dependencies with chain",
     tags=["team_a", "source_a"],
     max_consecutive_failed_dag_runs=3,
     default_args=default_args,
 )
-def my_dag():
+def task_dependencies_dag():
 
     @task
     def task_a():
@@ -58,4 +59,5 @@ def my_dag():
     # a >> task_b() >> task_c()
     # a >> task_d() >> task_e()
 
-my_dag()
+
+task_dependencies_dag()
