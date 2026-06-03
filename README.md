@@ -1,45 +1,102 @@
-Overview
-========
+# Apache Airflow Learning Reference
 
-Welcome to Astronomer! This project was generated after you ran 'astro dev init' using the Astronomer CLI. This readme describes the contents of the project, as well as how to run Apache Airflow on your local machine.
+A personal learning repository created while working through the Astronomer Airflow 101 course and exploring Apache Airflow concepts.
 
-Project Contents
-================
+The purpose of this repository is to provide practical examples, notes, and reference material for understanding Airflow fundamentals, DAG development, scheduling, orchestration, debugging, testing, and task dependencies.
 
-Your Astro project contains the following files and folders:
+## Learning Objectives
 
-- dags: This folder contains the Python files for your Airflow DAGs. By default, this directory includes one example DAG:
-    - `example_astronauts`: This DAG shows a simple ETL pipeline example that queries the list of astronauts currently in space from the Open Notify API and prints a statement for each astronaut. The DAG uses the TaskFlow API to define tasks in Python, and dynamic task mapping to dynamically print a statement for each astronaut. For more on how this DAG works, see our [Getting started tutorial](https://www.astronomer.io/docs/learn/get-started-with-airflow).
-- Dockerfile: This file contains a versioned Astro Runtime Docker image that provides a differentiated Airflow experience. If you want to execute other commands or overrides at runtime, specify them here.
-- include: This folder contains any additional files that you want to include as part of your project. It is empty by default.
-- packages.txt: Install OS-level packages needed for your project by adding them to this file. It is empty by default.
-- requirements.txt: Install Python packages needed for your project by adding them to this file. It is empty by default.
-- plugins: Add custom or community plugins for your project to this file. It is empty by default.
-- airflow_settings.yaml: Use this local-only file to specify Airflow Connections, Variables, and Pools instead of entering them in the Airflow UI as you develop DAGs in this project.
+- Understand Apache Airflow architecture
+- Create DAGs using the TaskFlow API
+- Define task dependencies
+- Work with scheduling and catchup behaviour
+- Use Variables, Connections, and XComs
+- Debug DAG parsing and scheduling issues
+- Test DAGs locally using Astronomer CLI
+- Build a foundation for orchestrating modern data platforms
 
-Deploy Your Project Locally
-===========================
+## Course Reference
 
-Start Airflow on your local machine by running 'astro dev start'.
+This repository was created while working through the Astronomer Airflow 101 learning path:
 
-This command will spin up five Docker containers on your machine, each for a different Airflow component:
+- Airflow 101: https://academy.astronomer.io/path/airflow-101
+- Lead Instructor: Marc Lamberti
+- Airflow CLI Module: Faizan Qazi
 
-- Postgres: Airflow's Metadata Database
-- Scheduler: The Airflow component responsible for monitoring and triggering tasks
-- DAG Processor: The Airflow component responsible for parsing DAGs
-- API Server: The Airflow component responsible for serving the Airflow UI and API
-- Triggerer: The Airflow component responsible for triggering deferred tasks
+All notes, examples, modifications, and explanations in this repository are my own learning exercises and interpretations of the course material.
 
-When all five containers are ready the command will open the browser to the Airflow UI at http://localhost:8080/. You should also be able to access your Postgres Database at 'localhost:5432/postgres' with username 'postgres' and password 'postgres'.
+## Repository Structure
 
-Note: If you already have either of the above ports allocated, you can either [stop your existing Docker containers or change the port](https://www.astronomer.io/docs/astro/cli/troubleshoot-locally#ports-are-not-available-for-my-local-airflow-webserver).
+```text
+.
+├── dags/
+├── docs/
+└── README.md
+```
 
-Deploy Your Project to Astronomer
-=================================
+## Example DAGs
 
-If you have an Astronomer account, pushing code to a Deployment on Astronomer is simple. For deploying instructions, refer to Astronomer documentation: https://www.astronomer.io/docs/astro/deploy-code/
+| DAG | Purpose |
+|------|---------|
+| `task_dependencies_dag.py` | Demonstrates task dependencies, branching, fan-out patterns, and the `chain()` helper |
+| `bash_task_dag.py` | Demonstrates `@task.bash`, Bash task execution, file creation, validation, and task dependencies |
+| `exampledag.py` | Astronomer example DAG generated during project initialisation. Demonstrates the TaskFlow API, API calls, Assets, XComs, and dynamic task mapping |
 
-Contact
-=======
+## Topics Covered
 
-The Astronomer CLI is maintained with love by the Astronomer team. To report a bug or suggest a change, reach out to our support.
+- Airflow Architecture
+- DAG Fundamentals
+- TaskFlow API
+- Task Dependencies
+- Scheduling
+- Catchup
+- Variables
+- Connections
+- XComs
+- Sensors
+- Dynamic Task Mapping
+- DAG Parsing
+- DAG Processor Logs
+- Scheduler Debugging
+- Connection Debugging
+- Astronomer CLI
+
+## Local Development
+
+Validate DAGs:
+
+```bash
+astro dev parse
+```
+
+Test a specific task:
+
+```bash
+astro dev run tasks test <dag_id> <task_id> <logical_date>
+```
+
+Example:
+
+```bash
+astro dev run tasks test bash_task_dag create_file 2026-06-03
+```
+
+Start a local Airflow environment:
+
+```bash
+astro dev start
+```
+
+Stop a local Airflow environment:
+
+```bash
+astro dev stop
+```
+
+## Notes
+
+This repository focuses on learning Apache Airflow fundamentals through practical examples and experimentation.
+
+The examples are intentionally simple and designed to demonstrate core Airflow concepts rather than production-ready pipelines.
+
+The `exampledag.py` file was generated automatically by Astronomer project initialisation and has been intentionally retained as a reference example.
