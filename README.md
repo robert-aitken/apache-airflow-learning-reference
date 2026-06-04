@@ -93,6 +93,13 @@ Stop a local Airflow environment:
 astro dev stop
 ```
 
+## GitHub Codespaces Setup
+
+This project can also be run in GitHub Codespaces when Docker Desktop, WSL 2, or local administrator access is not available.
+
+See [GitHub Codespaces Setup](docs/github_codespaces_setup.md).
+
+
 ## Notes
 
 This repository focuses on learning Apache Airflow fundamentals through practical examples and experimentation.
